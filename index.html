@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<style>
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body{
+        background-color:  #00978d;
+    }
+
+    #date-time{
+        margin-top: 10vh;
+    }
+
+    .a{
+        display: grid;
+        width: 80vw;
+        margin-left: 10vw;
+    }
+
+    #tit{
+        background-color: #005f73;
+        border-radius: 10px;
+        color: aliceblue;
+        font-family: 'Noto Sans', sans-serif;
+        font-size: 20px;
+    }
+
+    #cord{
+        border-radius: 10px;
+        text-align: left;
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+
+    #para{
+        margin-right: 25vw;
+    }
+
+
+    .gallary{
+        position: relative;
+        border-radius: 10px;
+        margin-top: 3vh;
+        padding-top: 10px;
+    }
+
+    .slides{
+        display: none;
+    }
+
+    .curse{
+        cursor: pointer;   
+    }
+
+    .demo{
+        opacity: 0.6;
+        height: 10vh;
+    }
+
+    .active,.demo:hover {
+        opacity: 1;
+    }
+
+    .prev,.next {
+        cursor: pointer;
+        position: absolute;
+        padding: 16px;
+        color: white;
+        user-select: none;
+        -webkit-user-select: none;
+        margin-top: 30vh;
+    }
+
+    .next {
+        right: 0;
+    }
+
+    #ah{
+        width: 80vw;
+    }
+
+    .cap-con {
+        text-align: center;
+        background-color: #222;
+        margin: 0;
+        padding: 2px 16px;
+        color: white;
+        height: 5vh;
+    }
+
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .row{
+        display: flex;
+        justify-content: center;
+        margin-left: 2.5vw;
+        object-fit: cover;
+        height: 10vmin;
+    }
+
+    .col {
+        float: left;
+        width: 100%;
+    }
+
+    .map{
+        margin-top: 3vh;
+        display: grid;
+        grid-template-columns: auto auto;
+        width: 78.3vw;
+        justify-content: center;
+        margin-left: 10vw;
+        background-color: #bb3e03;
+        box-shadow: #540b0e 10px 10px 10px;
+    }
+
+    #place{
+        text-align: center;
+        font-size: 15px;
+        padding: 30px;
+        margin-top: 20vh;
+        color: aliceblue;
+        font-family: 'Noto Sans', sans-serif;
+    }
+
+    .grid{
+        height: 150vh;
+        width: 78.3vw;
+        display: grid;
+        justify-content: center;
+        background-image: linear-gradient(to bottom right, #9b2226, #bb3e03, #ee9b00);
+        margin-left: 10vw;
+        margin-top: 3vh;
+        border-radius: 10px;
+    }
+
+    .newsL{
+        display: grid;
+        justify-content: center;
+        text-align: center;
+        padding: 10px;
+        color: aliceblue;
+        font-family: 'Noto Sans', sans-serif;
+    }
+
+    #a{
+        width: 50vw;
+        scale: .9;
+        background-color: white;
+        padding: 10px;
+        font-family:'Lora', serif;
+    }
+
+    fieldset{
+        display: grid;
+        justify-content: left;
+        padding-left: 20px;
+    }
+
+    input[type=text]{
+        border: none;
+        border-bottom: 2px solid red;
+        outline: none;
+        width: 100%;
+    }
+
+    input[type=text]:focus{
+        border: 3px solid red;
+    }
+
+    .submit{
+        width: 6vw;
+        height: 5vh;
+        font-size: 20px;
+        background-color: #1C3041;
+        color: aliceblue;
+        margin-left: 15vw;
+        border-radius: 10px;
+        box-shadow: 0 9px #999;
+    }
+
+    .submit:hover{
+        background-color: #1C3041;
+    }
+
+    .submit:active {
+        background-color: #1C3041;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+    #drag1, #drag2, #drag3{
+        width: 700px;
+        height: 450px;
+    }
+
+    #drag4, #drag5, #drag6{
+        width: 300px;
+        height: 300px;
+        margin-left: 50px;
+    }
+
+    #drag7, #drag8, #drag9{
+        width: 300px;
+        height: 250px;
+        margin-left: 50px;
+    }
+
+    #drop1, #drop2, #drop3{
+        width: 200px;
+        height: 200px;
+        margin: 50px;
+    }
+
+    .foot{
+    background-color:#9b2226;
+    color:white;
+    text-align: center;
+    width: 100%;
+    height: 10vh;
+    bottom:0;
+    }
+
+</style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+</head>
+<body>
+    
+    <div class="head">
+        <img src="Capture.PNG" width="100%" > 
+    </div>
+    <div class="a">
+
+    <div id="accordion">
+            <h3 id="tit">Maya</h3>
+    <div id="cord">
+        <p id="para">
+        The Mayan Empire, centered in the tropical lowlands of what is now Guatemala, reached the peak of its power and influence around the sixth century A.D. The Maya excelled at agriculture, pottery, writing, calendars and mathematics, and left behind an astonishing amount of impressive architecture and symbolic artwork. Most of the great stone cities of the Maya were abandoned by A.D. 900, however, and since the 19th century scholars have debated what might have caused this dramatic decline.
+        </p>
+        <img id='flag'src="mayaflag.png" width="100%">
+    </div>
+    <h3 id="tit">Aztec</h3>
+    <div id="cord">
+        <p id="para">
+            The Aztecs, who probably originated as a nomadic tribe in northern Mexico, arrived in Mesoamerica around the beginning of the 13th century. From their magnificent capital city, Tenochtitlan, the Aztecs emerged as the dominant force in central Mexico, developing an intricate social, political, religious and commercial organization that brought many of the region’s city-states under their control by the 15th century. Invaders led by the Spanish conquistador Hernán Cortés overthrew the Aztec Empire by force and captured Tenochtitlan in 1521, bringing an end to Mesoamerica’s last great native civilization.
+        </p>
+        <img id='flag2'src="aztecflag.jpg" width="100%">
+    </div>
+    <h3 id="tit">Inca</h3>
+    <div id="cord">
+        <p id="para">
+            The Inca Empire was a kingdom that developed in the Andes region of South America and gradually grew larger through the military strength and diplomacy of their emperors. Known as Tawantinsuyu, the Inca state spanned the distance of some 2,500 miles, from northern Ecuador to central Chile, and at its peak consisted of 12 million inhabitants from more than 100 different ethnic groups. Well-devised agricultural and roadway systems, along with a centralized religion and language, helped maintain a cohesive state. Despite their power, the Inca were quickly overwhelmed by the diseases and superior weaponry of Spanish invaders, and the last bastion of their immense empire was overtaken in 1572.
+        </p>
+        <img id='flag3'src="incaflag.png" width="100%">
+    </div>
+    </div>
+
+        <div class="gallary">
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next"  onclick="plusSlides(1)">&#10095;</a>
+            <div class="slides center">
+                <img src="maya.png" id="ah"></img>
+            </div>
+
+            <div class="slides">
+                <img src="inca.png" id="ah"></img>
+            </div>
+
+            <div class="slides">
+                <img src="aztec.png" id="ah"></img>
+            </div>
+
+            <div class="slides">
+                <img src="mayaart.png" id="ah"></img>
+            </div>
+
+            <div class="slides">
+                <img src="incaart.png"id="ah"></img>
+            </div>
+
+            <div class="slides">
+                <img src="aztecart.png" id="ah"></img>
+            </div>
+
+            <div class="slides">
+                <img src="mayapeople.png" id="ah"></img>
+            </div>
+
+            <div class="slides">
+                <img src="incapeople.png" id="ah"></img>
+            </div>
+
+            <div class="slides">
+                <img src="aztecpeople.png" id="ah"></img>
+            </div>
+            
+        </div>
+        
+
+        <div class="cap-con">
+            <p id="cap"></p>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <img class="demo curse" src="maya.png"  onclick="Slides(1)" alt="Mayan Temple"></img>
+            </div>
+            <div class="col">
+                <img class="demo curse" src="inca.png"  onclick="Slides(2)" alt="Incan Ruins"></img>
+            </div>
+            <div class="col">
+                <img class="demo curse" src="aztec.png"  onclick="Slides(3)" alt="Aztec Temple"></img>
+            </div>
+            <div class="col">
+                <img class="demo curse" src="mayaart.png"  onclick="Slides(4)" alt="Mayan Art"></img>
+            </div>
+            <div class="col">
+                <img class="demo curse" src="incaart.png"  onclick="Slides(5)" alt="Incan Art"></img>
+            </div>
+            <div class="col">
+                <img class="demo curse" src="aztecart.png"  onclick="Slides(6)" alt="Aztec Art"></img>
+            </div>
+            <div class="col">
+                <img class="demo curse" src="mayapeople.png"  onclick="Slides(7)" alt="Mayan People"></img>
+            </div>
+            <div class="col">
+                <img class="demo curse" src="incapeople.png"  onclick="Slides(8)" alt="Inca People"></img>
+            </div>
+            <div class="col">
+                <img class="demo curse" src="aztecpeople.png"  onclick="Slides(9)" alt="Aztec People"></img>
+            </div>
+        </div>
+    </div>
+
+    <div class="map">
+        <iframe id="map1" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3884.988325700694!2d-72.54715158531003!3d-13.163135967252526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x916d9a5f89555555%3A0x3a10370ea4a01a27!2sMachu%20Picchu!5e0!3m2!1sen!2sus!4v1670888017269!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <p id="place"><i>Machu Pichu</i><br>Machu Picchu is an Incan citadel set high in the Andes Mountains in Peru, above the Urubamba River valley. Built in the 15th century and later abandoned, it’s renowned for its sophisticated dry-stone walls that fuse huge blocks without the use of mortar, intriguing buildings that play on astronomical alignments and panoramic views.</p>
+        <p id="place"><i>Pyramid of Sun</i><br>The Pyramid of the Sun is the largest building in Teotihuacan, and one of the largest in Mesoamerica. It is believed to have been constructed about 200 AD.</p>
+        <iframe id="map2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d481775.4587782784!2d-99.01523629133312!3d19.374747450784675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ea845eb30ff9%3A0xad84278bbe6d0c38!2sPyramid%20of%20the%20Sun!5e0!3m2!1sen!2sus!4v1670888336256!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe id="map3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3193.2197484765943!2d-108.0022816849805!3d36.83721287331554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x873c76875d40dd6d%3A0x57595ac8c7efcba9!2sAztec%20Ruins%20National%20Monument!5e0!3m2!1sen!2sus!4v1670888882485!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <p id="place"><i>Aztec Ruins</i><br>The Aztec Ruins National Monument in northwestern New Mexico, USA consists of preserved structures constructed by the Pueblo Indians. The national monument lies on the western bank of the Animas River in Aztec, New Mexico, about 12 miles northeast of Farmington.</p>
+    </div>
+
+    <div class="grid">
+        <h1 class="newsL"><i>Join Our News Letter Today!!</i></h1>
+        <div id="a">
+            <p id="p">Sign Up Today</p>
+            <form>
+                <fieldset>
+                    <legend><b>Billing Information</b></legend>
+                        <div class="formCon">
+                            <label id="first">First Name:</label>
+                            <input type="text" id="first" name="fname" pattern="^[a-zA-Z]*[^0-9]" required><br><br>
+                            <label id="last">Last Name:</label>
+                            <input type="text" id="last" name="lname" pattern="^[a-zA-Z]*[^0-9]" required><br><br>
+                            <label id="addy1">Address Line:</label>
+                            <input type="text" id="addy1"  pattern="^[0-9]+\s[a-zA-Z]+"  required><br><br>
+                            <label id="addy2">Address Line(2):</label>
+                            <input type="text" id="addy2"  pattern="^[0-9]+\s[a-zA-Z]+" title="Only input if you have a second residence"><br><br>
+                            <label id="city">City:</label>
+                            <input type="text" id="city" pattern="^[a-zA-Z]*[^0-9]" required><br><br>
+                        </div>
+                            <label id="zip">Zip Code:</label>
+                            <input type="text" id="zip" pattern="^[0-9]{5}">
+                            <label id="state">State:</label>
+                            <select id="state" name="State" required>
+                                <option value="az">Arizona</option>
+                                <option value="ca">California</option>
+                                <option value="nv">Nevada</option>
+                            </select><br>
+                            <label id="country">Country:</label>
+                            <select id="country" name="Country" required>
+                                <option value="USA">United States of America</option>
+                                <option value="CA">Canada</option>
+                                <option value="UK">United Kingdom</option>
+                            </select><br>
+                            <label id="phone">Phone Number:</label>
+                            <input type="text" id="first" pattern="^[0-9]{3}-[0-9]{3}-[0-9]{4}"><br>
+                            <label id="eMail">Email:</label>
+                            <input type="text" id="eMail" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z]+" required>
+                            <br>
+                        
+                </fieldset>
+    <br>
+                <fieldset>
+                    <legend><b>Credit Card Information</b></legend>
+                        <label id="card1">VISA</label>
+                        <input type="radio" id="card1" name="cardthing" value="visa">
+                        <label id="card2">MASTERCARD</label>
+                        <input type="radio" id="card2" name="cardthing" value="mastercard">
+                        <label id="card3">AMERICAN EXPRESS</label>
+                        <input type="radio" id="card3" name="cardthing" value="american-express"><br><br>
+                        <label type="card">Card Number</label>
+                        <input type="text" id="card" pattern="^[0-9]{4}-[0-9]{4}-[0-9]{4}}-[0-9]{4}" required>
+                        <label id="exp">Card Expiration Date</label>
+                        <input type="text" id="datepicker"><br>
+                        <label id="cvc">CVC Code</label>
+                        <input type="text" id="cvc" pattern="^[0-9]{3}" required>
+                </fieldset><br><br>
+                <input class="submit" type="submit" value="Submit"><br><br>
+            </form>
+           
+        </div>
+        </div>
+        <br>
+        <div class="foot">
+        <footer>
+            <p>All Rights Reserved &copy 2022</p>
+            <address> 6997 N Glen Harbor Blvd <br>
+             Glendale <br>AZ 85307</address>
+            <i class="fa-solid fa-comment-dots"></i>
+            <i class="fa-solid fa-handshake-simple"></i>
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-square-rss"></i>
+        </footer>
+        </div>
+</body>
+<script>
+
+    //Accordion
+        $( function() {
+            $( "#accordion" ).accordion({
+            collapsible: true
+            });
+        } );
+    
+    //Date & Tooltip
+        $( function() {
+            $( "#datepicker" ).datepicker();
+            } );
+        $( function() {
+            $( document ).tooltip();
+        } );
+
+    
+    //Gallary
+        let slideIndex = 1;
+        showSlides(slideIndex);
+    
+        function plusSlides(n) {
+        showSlides(slideIndex += n);
+        }
+    
+        function currentSlide(n) {
+        showSlides(slideIndex = n);
+        }
+    
+        function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("slides");
+        let dots = document.getElementsByClassName("demo");
+        let captionText = document.getElementById("cap");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        captionText.innerHTML = dots[slideIndex-1].alt;
+        }
+    
+    //Slide
+        $("#flag").click(function(){
+            $("#flag").effect('bounce');
+        });
+
+        $("#flag2").click(function(){
+            $("#flag2").effect('bounce');
+        });
+
+        $("#flag3").click(function(){
+            $("#flag3").effect('bounce');
+        });
+    </script>
+</html>
